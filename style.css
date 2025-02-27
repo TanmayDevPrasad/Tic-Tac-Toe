@@ -3,14 +3,104 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     background-color: rgb(172, 204, 214);
-    height: 100vh;
+    /* height: 100vh; */
+    position: relative;
+    
 }
 
-.title {
+.choiceMenu{
+    width: 90vw;
+    height: 60vh;
+    background-color: rgb(39, 35, 61);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 25px;
+}
+#question{
+    color: white;
     font-size: 2.5rem;
+    text-align: center;
+    font-family: cursive;
+    margin-bottom: 20px;
+}
+.choiceBtns{
+    display: flex;
+    gap: 100px;
+    margin-bottom: 10px;
+}
+.option{
+    font-size: 2.5rem;
+    display: grid;
+    place-content: center;
+    width: 150px;
+    border-radius: 25px;
+    padding: 10px 30px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    position: relative;
+}
+
+/* applying border animation for choice buttons */
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.option::after, .option::before{
+    --angle: 0deg;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -10;
+    padding:3px;
+    background-image: conic-gradient(from var(--angle),yellow 0deg, yellow 90deg, transparent 90deg,transparent 180deg, yellow 180deg, yellow 270deg, transparent 270deg, transparent 360deg );
+    animation: spin 3s linear  infinite  ;
+}
+.option::before{
+    filter: blur(0.25rem);
+}
+@keyframes spin {
+    from{
+        --angle:0deg;
+    }
+    to{
+        --angle:360deg;
+    }
+}
+/* buttons border animation ends here  */
+
+.option:active{
+    background-color: rgb(14, 35, 54);
+    scale: 1.2;
+}
+
+.option:hover{
+    background-color: #343131;
+    text-shadow: 0px 0px 15px white;
+}
+
+.x{
+    font-size: 3.2rem;
+}
+.title {
+    font-size: 3.5rem;
     font-family: cursive;
     text-align: center;
     font-weight: bolder;
@@ -21,22 +111,15 @@ header {
     background:navy;
     height: fit-content;
     color: white;
+    margin-bottom: 50px;
+    opacity: 0.5;
 }
-
-.choice {
-    border: 2px solid red;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 2rem;
-    font-family: monospace;
-    font-weight: bolder;
-}
-
 main {
     height: 90%;
     display: grid;
     place-content: center;
-    border: 2px solid;
+    gap: 50px;
+    opacity: 0.5;
 }
 
 .arena {
@@ -73,4 +156,57 @@ main {
     scale: 4.5;
     margin-top: 7px;
     font-weight: bolder;
+}
+
+#play{
+    border-radius: 10px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-family: cursive;
+    font-weight: bold;
+    background-color:salmon;
+    border: none;
+    box-shadow: 0px 0px 15px 0px rgb(142, 79, 2);
+}
+
+#play:active{
+    /* box-shadow: 0px 0px 15px 0px rgb(25, 255, 94); */
+    background-color:rgb(213, 108, 97);
+
+}
+
+@media only screen and (max-width : 600px){
+    body{
+        width: 100%;
+        height: 100vh;
+        border: 2px solid;
+    }
+    .arena{
+        /* scale: 0.8; */
+    }
+    main{
+        height: 60%;
+    }
+    .title{
+        font-size: 3rem;
+    }
+    #play{
+        width: 50%;
+        margin: auto;
+    }
+    .choiceMenu{
+        height: 70vh;
+    }
+    .choiceBtns{
+        flex-direction: column;
+        gap: 30px;
+    }
+    .option{
+        width: 180px;
+    }
+    #question{
+        font-size: 2rem;
+        font-weight: bolder;
+    }
 }
