@@ -24,7 +24,7 @@ document.querySelector(".choiceBtns").addEventListener("click", (event) => {
 }
 )
 
-//logic for ai to play
+//funtion for ai to play on easy mode
 function aiPlay() {
     const boxes = document.querySelectorAll(".box") //selecting all the boxes
     const emptyBoxes = [] //array to store all the empty boxes
